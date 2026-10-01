@@ -1,6 +1,6 @@
 # Python — Fundamentos
 
-> Anotações práticas sobre o que é Python e onde ele é usado, declaração de variáveis, regras e convenções de nomenclatura, comentários e a função `print()`.
+> Anotações práticas sobre o que é Python e onde ele é usado, declaração de variáveis, regras e convenções de nomenclatura, comentários, a função `print()`, tipos de dados, strings e seus métodos, inteiros e floats, atribuição aumentada, condicionais e operadores de comparação, valores truthy e falsy e operadores booleanos.
 
 ---
 
@@ -133,3 +133,1067 @@ print('My favorite colors are', 'blue', 'green', 'red')
 ```
 
 Python adiciona automaticamente um espaço entre cada item quando você os separa com vírgulas. Isso é útil quando você quer imprimir várias informações juntas.
+
+---
+
+## Tipos de dados
+
+Antes de trabalhar com variáveis em Python, é importante entender os tipos de dados. Um tipo de dado descreve o tipo de valor que uma variável contém, por exemplo, um número ou um pedaço de texto. Linguagens de programação usam tipos de dados para saber como armazenar e trabalhar com diferentes tipos de informação.
+
+### Tipagem dinâmica
+
+Python é uma linguagem dinamicamente tipada. Isso significa que você não especifica o tipo de dado de uma variável quando a cria. Python determina o tipo a partir do valor atribuído à variável.
+
+Aqui estão alguns exemplos:
+
+```python
+name = 'John Doe' # Python sabe que isto é uma string
+age = 25 # Python sabe que isto é um inteiro
+```
+
+Uma variável pode depois receber um valor de um tipo diferente:
+
+```python
+age = 25
+age = 'Twenty-five'
+```
+
+Após a segunda atribuição, `age` contém uma string em vez de um inteiro.
+
+### Os quatro tipos básicos
+
+Por enquanto, concentre-se em quatro tipos de dados que você usará ao longo deste módulo:
+
+- **Inteiro**: Um número inteiro sem decimais, por exemplo, `10` ou `-5`.
+
+  ```python
+  my_integer_var = 10
+  print('Integer:', my_integer_var) # Integer: 10
+  ```
+
+- **Float**: Um número com ponto decimal, como `4.41` ou `-0.4`.
+
+  ```python
+  my_float_var = 4.50
+  print('Float:', my_float_var) # Float: 4.5
+  ```
+
+- **String**: Uma sequência de caracteres entre aspas simples ou duplas como `'Hello world!'`.
+
+  ```python
+  my_string_var = 'hello'
+  print('String:', my_string_var) # String: hello
+  ```
+
+- **Booleano**: Um tipo verdadeiro ou falso, escrito como `True` ou `False`.
+
+  ```python
+  my_boolean_var = True
+  print('Boolean:', my_boolean_var) # Boolean: True
+  ```
+
+---
+
+## Strings e imutabilidade
+
+Uma string é uma sequência de caracteres cercada por aspas simples ou duplas. O Python trata ambas as formas como strings, então você pode usar qualquer uma delas. Aqui estão alguns exemplos:
+
+```python
+my_str_1 = 'Hello'
+my_str_2 = "World"
+```
+
+### Strings multilinha
+
+Se você precisar de uma string multilinha, pode usar aspas duplas triplas ou aspas simples triplas:
+
+```python
+my_str_3 = """Multiline
+string"""
+my_str_4 = '''Another
+multiline
+string'''
+```
+
+### Aspas dentro da string
+
+Se sua string contém aspas simples ou duplas, então você tem duas opções:
+
+- Use o tipo oposto de aspas. Ou seja, se sua string contém aspas simples, use aspas duplas para envolver a string e vice-versa:
+
+  ```python
+  msg = "It's a sunny day"
+  quote = 'She said, "Hello World!"'
+  ```
+
+- Escape a aspa simples ou dupla na string com uma barra invertida (`\`). Com este método, você pode usar aspas simples ou duplas para envolver a própria string:
+
+  ```python
+  msg = 'It\'s a sunny day'
+  quote = "She said, \"Hello!\""
+  ```
+
+### O operador in
+
+Às vezes, pode ser necessário verificar se uma string contém um ou mais caracteres. Para isso, o Python fornece o operador `in`, que retorna um booleano que especifica se o caractere ou os caracteres existem na string ou não.
+
+Aqui estão alguns exemplos:
+
+```python
+my_str = 'Hello world'
+
+print('Hello' in my_str)  # True
+print('hey' in my_str)    # False
+print('hi' in my_str)     # False
+print('e' in my_str)      # True
+print('f' in my_str)      # False
+```
+
+### Tamanho e indexação
+
+Vamos agora ver como é possível obter o tamanho de uma string e como trabalhar com caracteres individuais em uma string, um processo que chamamos de **indexação**. Para obter o comprimento de uma string, você pode usar a função embutida `len()`. Aqui está um exemplo:
+
+```python
+my_str = 'Hello world'
+print(len(my_str))  # 11
+```
+
+Cada caractere em uma string tem uma posição chamada índice. O índice é baseado em zero, significando que o índice do primeiro caractere de uma string é `0`, o índice do segundo caractere é `1` e assim por diante. Para acessar um caractere pelo seu índice, você usa colchetes (`[]`) com o índice do caractere que deseja acessar dentro. Aqui estão alguns exemplos:
+
+```python
+my_str = "Hello world"
+
+print(my_str[0])  # H
+print(my_str[6])  # w
+```
+
+### Indexação negativa
+
+A indexação negativa também é permitida, então você pode obter o último caractere de qualquer string com `-1`, o penúltimo caractere com `-2` e assim por diante:
+
+```python
+my_str = "Hello world"
+
+print(my_str[-1])  # d
+print(my_str[-2])  # l
+```
+
+### Imutabilidade
+
+No Python, valores podem ser mutáveis ou imutáveis. Um valor mutável pode ser alterado depois de criado, enquanto um valor imutável não pode.
+
+Você pode apontar uma variável para um novo valor, o que é chamado de reatribuição, mas não pode mudar o valor imutável em si adicionando, removendo ou substituindo qualquer um de seus elementos.
+
+Strings são imutáveis em Python, mas você ainda pode reatribuir uma variável para uma string diferente:
+
+```python
+greeting = 'hi'
+greeting = 'hello'
+print(greeting) # hello
+```
+
+Mas a modificação direta de uma string não é permitida:
+
+```python
+greeting = 'hi'
+greeting[0] = 'H' # TypeError: 'str' object does not support item assignment
+```
+
+Inteiros, floats e booleanos também são imutáveis. Você vai aprender sobre outros tipos imutáveis em lições futuras.
+
+---
+
+## Métodos de string
+
+Um método é uma função que você chama em um valor. Para chamar um método de string, escreva a string ou o nome da variável seguido de um ponto e da chamada do método. Você vai aprender mais sobre métodos quando estudar classes e objetos. Aqui estão alguns métodos comuns de string:
+
+### upper() — tudo em maiúsculas
+
+Retorna uma nova string com todos os caracteres convertidos para maiúsculas.
+
+```python
+my_str = 'hello world'
+
+uppercase_my_str = my_str.upper()
+print(uppercase_my_str)  # HELLO WORLD
+```
+
+### lower() — tudo em minúsculas
+
+Retorna uma nova string com todos os caracteres convertidos para minúsculas.
+
+```python
+my_str = 'Hello World'
+
+lowercase_my_str = my_str.lower()
+print(lowercase_my_str)  # hello world
+```
+
+### strip() — remove do início e do fim
+
+Retorna uma nova string com os caracteres especificados no início e no fim removidos. Se nenhum argumento for passado, remove os espaços em branco do início e do fim.
+
+```python
+my_str = '  hello world  '
+
+trimmed_my_str = my_str.strip()
+print(trimmed_my_str)  # hello world
+```
+
+### replace(old, new) — substitui
+
+Retorna uma nova string com todas as ocorrências de `old` substituídas por `new`.
+
+```python
+my_str = 'hello world'
+
+replaced_my_str = my_str.replace('hello', 'hi')
+print(replaced_my_str)  # hi world
+```
+
+### split(separator) — divide em uma lista
+
+Divide uma string em um separador especificado em uma lista de strings. Uma lista agrupa valores entre colchetes. Se nenhum separador for especificado, `split()` divide pelo espaço em branco.
+
+```python
+my_str = 'hello world'
+
+split_words = my_str.split()
+print(split_words)  # ['hello', 'world']
+```
+
+### join() — junta em uma string
+
+Junta as strings em uma coleção em uma única string com um separador.
+
+```python
+my_list = ['hello', 'world']
+
+joined_my_str = ' '.join(my_list)
+print(joined_my_str)  # hello world
+```
+
+### startswith(prefix) — começa com
+
+Retorna um booleano indicando se uma string começa com o prefixo especificado.
+
+```python
+my_str = 'hello world'
+
+starts_with_hello = my_str.startswith('hello')
+print(starts_with_hello)  # True
+```
+
+### endswith(suffix) — termina com
+
+Retorna um booleano indicando se uma string termina com o sufixo especificado.
+
+```python
+my_str = 'hello world'
+
+ends_with_world = my_str.endswith('world')
+print(ends_with_world)  # True
+```
+
+### find(substring) — índice da primeira ocorrência
+
+Retorna o índice da primeira ocorrência de `substring`, ou `-1` se não encontrar nenhuma.
+
+```python
+my_str = 'hello world'
+
+world_index = my_str.find('world')
+print(world_index)  # 6
+```
+
+### count(substring) — conta ocorrências
+
+Retorna o número de ocorrências não sobrepostas de uma substring em uma string.
+
+```python
+my_str = 'hello world'
+
+o_count = my_str.count('o')
+print(o_count)  # 2
+```
+
+### capitalize() — primeira letra maiúscula
+
+Retorna uma nova string com o primeiro caractere em maiúscula e os outros caracteres em minúscula.
+
+```python
+my_str = 'hello world'
+
+capitalized_my_str = my_str.capitalize()
+print(capitalized_my_str)  # Hello world
+```
+
+### isupper() — está tudo em maiúsculas?
+
+Retorna `True` se a string contém pelo menos um caractere com caixa e todos os caracteres com caixa são maiúsculas. Caso contrário, retorna `False`.
+
+```python
+my_str = 'hello world'
+
+is_all_upper = my_str.isupper()
+print(is_all_upper)  # False
+```
+
+### islower() — está tudo em minúsculas?
+
+Retorna `True` se a string contém pelo menos um caractere com caixa e todos os caracteres com caixa são minúsculas. Caso contrário, retorna `False`.
+
+```python
+my_str = 'hello world'
+
+is_all_lower = my_str.islower()
+print(is_all_lower)  # True
+```
+
+### title() — primeira letra de cada palavra maiúscula
+
+Retorna uma nova string com a primeira letra de cada palavra em maiúsculas e as demais letras em minúsculas.
+
+```python
+my_str = 'hello world'
+
+title_case_my_str = my_str.title()
+print(title_case_my_str)  # Hello World
+```
+
+### Resumo
+
+| Método               | Retorna                                                                    |
+| -------------------- | -------------------------------------------------------------------------- |
+| `upper()`            | nova string em maiúsculas                                                  |
+| `lower()`            | nova string em minúsculas                                                  |
+| `strip()`            | nova string sem os espaços (ou os caracteres indicados) do início e do fim |
+| `replace(old, new)`  | nova string com `old` trocado por `new`                                    |
+| `split(separator)`   | lista de strings                                                           |
+| `join()`             | uma string com os itens da coleção unidos pelo separador                   |
+| `startswith(prefix)` | `True` ou `False`                                                          |
+| `endswith(suffix)`   | `True` ou `False`                                                          |
+| `find(substring)`    | índice da primeira ocorrência, ou `-1`                                     |
+| `count(substring)`   | número de ocorrências não sobrepostas                                      |
+| `capitalize()`       | nova string com só o primeiro caractere em maiúscula                       |
+| `isupper()`          | `True` ou `False`                                                          |
+| `islower()`          | `True` ou `False`                                                          |
+| `title()`            | nova string com a primeira letra de cada palavra em maiúscula              |
+
+---
+
+## Inteiros e floats
+
+Inteiros e floats são os principais tipos de dados numéricos em Python. Com eles, você pode armazenar dados numéricos e realizar operações matemáticas.
+
+Vamos ver o que são inteiros e floats, como realizar cálculos aritméticos com eles e algumas funções embutidas que o Python oferece para trabalhar com ambos.
+
+### Inteiros
+
+Inteiros são números inteiros sem pontos decimais, incluindo números positivos, números negativos e zero:
+
+```python
+my_int_1 = 56
+my_int_2 = -4
+
+print(type(my_int_1)) # <class 'int'>
+print(type(my_int_2)) # <class 'int'>
+```
+
+Aqui está como realizar uma operação de adição com inteiros:
+
+```python
+my_int_1 = 56
+my_int_2 = 12
+
+sum_ints = my_int_1 + my_int_2
+print('Integer Addition:', sum_ints) # Integer Addition: 68
+```
+
+Aqui está como realizar uma subtração com inteiros:
+
+```python
+my_int_1 = 56
+my_int_2 = 12
+
+# Subtração
+diff_ints = my_int_1 - my_int_2
+print('Integer Subtraction:', diff_ints) # Integer Subtraction: 44
+```
+
+Aqui está como realizar uma operação de multiplicação com inteiros:
+
+```python
+my_int_1 = 12
+my_int_2 = 4
+
+# Multiplicação
+product_ints = my_int_1 * my_int_2
+print('Integer Multiplication:', product_ints) # Integer Multiplication: 48
+```
+
+E aqui está como realizar uma operação de divisão com inteiros:
+
+```python
+my_int_1 = 56
+my_int_2 = 12
+
+# Divisão
+div_ints = my_int_1 / my_int_2
+print('Division:', div_ints) # Division: 4.666666666666667
+```
+
+### Floats
+
+Floats representam números em forma de ponto flutuante, incluindo zero, como `3.14`, `-0.5` ou `0.0`.
+
+```python
+my_float_1 = -12.0
+my_float_2 = 4.9
+
+print(type(my_float_1)) # <class 'float'>
+print(type(my_float_2)) # <class 'float'>
+```
+
+Aqui está uma operação de adição com floats:
+
+```python
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+float_addition = my_float_1 + my_float_2
+print('Float Addition:', float_addition) # Float Addition: 17.4
+```
+
+Aqui está uma operação de subtração com floats:
+
+```python
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+float_subtraction = my_float_2 - my_float_1
+print('Float Subtraction:', float_subtraction) # Float Subtraction: 6.6
+```
+
+Aqui está uma operação de multiplicação com floats:
+
+```python
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+float_multiplication = my_float_2 * my_float_1
+print('Float Multiplication:', float_multiplication) # Float Multiplication: 64.80000000000001
+```
+
+E aqui está uma operação de divisão com floats:
+
+```python
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+float_division = my_float_2 / my_float_1
+print('Float Division:', float_division) # Float Division: 2.222222222222222
+```
+
+### Misturando inteiros e floats
+
+Se você adicionar um inteiro e um float, o resultado é automaticamente convertido para um float:
+
+```python
+my_int = 56
+my_float = 5.4
+
+sum_int_and_float = my_int + my_float
+
+print(sum_int_and_float) # 61.4
+print(type(sum_int_and_float)) # <class 'float'>
+```
+
+Isso é verdade para outras operações aritméticas básicas também, como subtração, multiplicação e divisão. Se você misturar inteiros e floats, Python retornará um float como resultado.
+
+### Módulo, divisão inteira e exponenciação
+
+Você também pode realizar cálculos aritméticos mais complexos, como obter o resto de dois números com o operador módulo, divisão inteira e exponenciação com inteiros e floats.
+
+O operador módulo (`%`) retorna o resto quando o valor à esquerda é dividido pelo valor à direita:
+
+```python
+my_int_1 = 56
+my_int_2 = 12
+
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+mod_ints = my_int_1 % my_int_2
+mod_floats = my_float_2 % my_float_1
+
+print('Integer Modulo:', mod_ints) # Integer Modulo: 8
+print('Float Modulo:', mod_floats) # Float Modulo: 1.1999999999999993
+```
+
+A divisão inteira divide dois números e retorna o maior inteiro menor ou igual ao resultado. Isso é feito com o operador de barra dupla para frente (`//`):
+
+```python
+my_int_1 = 56
+my_int_2 = 12
+
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+floor_div_ints = my_int_1 // my_int_2
+floor_div_floats = my_float_2 // my_float_1
+
+print('Integer Floor Division:', floor_div_ints) # Integer Floor Division: 4
+print('Float Floor Division:', floor_div_floats) # Float Floor Division: 2.0
+```
+
+A exponenciação eleva um número à potência de outro e é feita com o operador de dois asteriscos (`**`):
+
+```python
+my_int_1 = 56
+my_int_2 = 12
+
+my_float_1 = 5.4
+my_float_2 = 12.0
+
+exp_ints = my_int_1 ** my_int_2
+exp_floats = my_float_1 ** my_float_2
+
+print('Integer Exponentiation:', exp_ints) # Integer Exponentiation: 951166013805414055936
+print('Float Exponentiation:',  exp_floats) # Float Exponentiation: 614787626.1765089
+```
+
+### Imprecisão dos floats
+
+Às vezes, você pode notar que o resultado de uma operação envolvendo floats tem mais dígitos decimais do que o esperado. Por exemplo, a soma `0.1 + 0.2` é igual a `0.30000000000000004` em vez de `0.3`.
+
+Isso acontece porque os números são armazenados em formato binário e algumas frações não podem ser representadas exatamente em binário. Como resultado, elas são armazenadas como aproximações finitas, da mesma forma que a fração `1/3` não pode ser representada com um número finito de dígitos em decimal e é truncada após um certo número de seus dígitos infinitos (`0.33333...`).
+
+Isso leva a pequenos erros de arredondamento.
+
+### Conversão com float() e int()
+
+Python também fornece funções internas para converter dados numéricos ou strings em inteiros ou floats.
+
+A função `float()` retorna um número de ponto flutuante construído a partir do número fornecido:
+
+```python
+my_int_1 = 56
+my_float_1 = float(my_int_1)
+
+print(my_float_1)  # 56.0
+print(type(my_float_1))  # <class 'float'>
+```
+
+A função `int()` retorna um inteiro construído a partir do número fornecido:
+
+```python
+my_float = 12.92563
+my_int = int(my_float)
+
+print(my_int)  # 12
+print(type(my_int))  # <class 'int'>
+```
+
+Além disso, você pode usar as mesmas funções internas para converter uma string em um float ou integer:
+
+```python
+my_str_int = '45'
+my_str_float = '7.8'
+
+converted_int = int(my_str_int)
+converted_float = float(my_str_float)
+
+print(converted_int, type(converted_int))  # 45 <class 'int'>
+print(converted_float, type(converted_float))  # 7.8 <class 'float'>
+```
+
+### round(), abs() e pow()
+
+Aqui estão algumas outras funções embutidas que o Python oferece para trabalhar com inteiros e floats.
+
+- `round()`: Arredonda um número para o número especificado de casas decimais. Por padrão essa função arredonda para o inteiro mais próximo e retorna um número inteiro sem casas decimais:
+
+  ```python
+  my_int_1 = 4.798
+  my_int_2 = 4.253
+
+  rounded_int_1 = round(my_int_1)
+  rounded_int_2 = round(my_int_2, 1)
+
+  print(rounded_int_1) # 5
+  print(rounded_int_2) # 4.3
+  ```
+
+  > Repare: quando o número está exatamente no meio, `round()` arredonda para o inteiro **par** mais próximo. `round(2.5)` dá `2` e `round(3.5)` dá `4`.
+
+- `abs()`: Retorna o valor absoluto de um número:
+
+  ```python
+  num = -15
+
+  absolute_value = abs(num)
+  print(absolute_value) # 15
+  ```
+
+- `pow()`: eleva um número à potência de outro ou realiza exponenciação modular.
+
+  ```python
+  result_1 = pow(2, 3)  # Equivale a 2 ** 3
+  print(result_1)  # 8
+
+  result_2 = pow(2, 3, 5)  # (2 ** 3) % 5
+  print(result_2)  # 3
+  ```
+
+---
+
+## Atribuição aumentada
+
+A atribuição aumentada aplica uma operação a uma variável e armazena o resultado de volta na mesma variável, tudo em um único passo.
+
+### Sintaxe
+
+A sintaxe básica de uma atribuição aumentada é assim:
+
+```python
+variable <operator>= value
+```
+
+Para variáveis numéricas, esta é uma forma mais curta de escrever a seguinte atribuição:
+
+```python
+variable = variable <operator> value
+```
+
+Por exemplo, você pode usar a atribuição aumentada para adicionar `5` a uma variável existente:
+
+```python
+my_var = 10
+my_var += 5
+
+print(my_var) # 15
+```
+
+E aqui está a mesma coisa, mas sem atribuição aumentada:
+
+```python
+my_var = 10
+my_var = my_var + 5
+
+print(my_var) # 15
+```
+
+A vantagem da atribuição aumentada é que ela fornece uma forma concisa e legível de atualizar o valor de uma variável sem repetir o nome da variável. Por sua vez, isso reduz a redundância e os erros potenciais que podem surgir de um erro de digitação ou algo semelhante.
+
+### Outros operadores
+
+Operadores aritméticos e bit a bit têm formas de atribuição aumentada. Já vimos o operador de atribuição de adição (`+=`), então vamos ver outros.
+
+- O operador de atribuição de subtração (`-=`) subtrai o operando da direita da variável da esquerda e armazena a diferença na variável da esquerda:
+
+  ```python
+  count = 14
+  count -= 3
+
+  print(count) # 11
+  ```
+
+- O operador de atribuição de multiplicação (`*=`) multiplica a variável à esquerda pelo operando à direita e armazena o produto de volta na variável à esquerda:
+
+  ```python
+  product = 65
+  product *= 7
+
+  print(product) # 455
+  ```
+
+- O operador de atribuição de divisão (`/=`) divide a variável à esquerda pela da direita e armazena o resultado de volta na variável à esquerda:
+
+  ```python
+  price = 100
+  price /= 4
+
+  print(price) # 25.0
+  ```
+
+- O operador de atribuição de divisão inteira (`//=`) realiza a divisão inteira da variável à esquerda pelo valor à direita e armazena o resultado de volta na variável à esquerda:
+
+  ```python
+  total_pages = 23
+  total_pages //= 5
+
+  print(total_pages) # 4
+  ```
+
+- O operador de atribuição de módulo (`%=`) calcula o resto da variável à esquerda dividida pela da direita e armazena o resultado de volta na variável à esquerda:
+
+  ```python
+  bits = 35
+  bits %= 2
+
+  print(bits) # 1
+  ```
+
+- O operador de atribuição de exponenciação (`**=`) eleva a variável à esquerda à potência da variável à direita e armazena o resultado de volta na variável à esquerda:
+
+  ```python
+  power = 2
+  power **= 3
+
+  print(power) # 8
+  ```
+
+### Atribuição aumentada com strings
+
+Você também pode usar alguns operadores de atribuição aumentada com strings. Por exemplo, o operador de atribuição de adição facilita a concatenação de strings:
+
+```python
+greet = 'Hello'
+greet += ' World'
+
+print(greet) # Hello World
+```
+
+E o operador de atribuição de multiplicação pode ser usado para repetir uma string:
+
+```python
+greet = 'Hello'
+greet *= 3
+
+print(greet) # HelloHelloHello
+```
+
+Os operadores de atribuição de subtração e divisão geram um `TypeError` quando usados com strings:
+
+```python
+greet = 'Hello'
+greet -= ' World' # TypeError: unsupported operand type(s) for -=: 'str' and 'str'
+```
+
+```python
+greet = 'Hello'
+greet /= 'World' # TypeError: unsupported operand type(s) for /=: 'str' and 'str'
+```
+
+### Resumo
+
+| Operador | Equivale a   | Operação        |
+| -------- | ------------ | --------------- |
+| `+=`     | `x = x + y`  | adição          |
+| `-=`     | `x = x - y`  | subtração       |
+| `*=`     | `x = x * y`  | multiplicação   |
+| `/=`     | `x = x / y`  | divisão         |
+| `//=`    | `x = x // y` | divisão inteira |
+| `%=`     | `x = x % y`  | módulo (resto)  |
+| `**=`    | `x = x ** y` | exponenciação   |
+
+---
+
+## Condicionais e operadores de comparação
+
+As instruções condicionais, ou condicionais, permitem controlar o fluxo do programa com base no fato de determinadas condições serem verdadeiras ou falsas.
+
+Mas antes de entrarmos em detalhes, vamos revisar os elementos básicos das instruções condicionais, começando pelos operadores de comparação. Os operadores de comparação permitem comparar dois ou mais valores e retornam um valor booleano.
+
+Em uma lição anterior, você aprendeu que os valores booleanos são um dos tipos de dados em Python e só podem ser verdadeiros (`True`) ou falsos (`False`).
+
+### Operadores de comparação
+
+Segue uma tabela com os operadores de comparação em Python:
+
+| Operador | Nome             | Descrição                                                           |
+| -------- | ---------------- | ------------------------------------------------------------------- |
+| `==`     | Igual            | Verifica se dois valores são iguais.                                |
+| `!=`     | Não é igual      | Verifica se dois valores são diferentes.                            |
+| `>`      | Maior que        | Verifica se o valor à esquerda é maior que o valor à direita.       |
+| `<`      | Menor que        | Verifica se o valor à esquerda é menor que o valor à direita.       |
+| `>=`     | Maior ou igual a | Verifica se o valor à esquerda é maior ou igual ao valor à direita. |
+| `<=`     | Menor ou igual a | Verifica se o valor à esquerda é menor ou igual ao valor à direita. |
+
+Aqui estão algumas dessas expressões que resultam em `True` ou `False`:
+
+```python
+print(3 > 4) # False
+print(3 < 4) # True
+print(3 == 4) # False
+print(4 == 4) # True
+print(3 != 4) # True
+print(3 >= 4) # False
+print(3 <= 4) # True
+```
+
+### A instrução if
+
+Esses operadores podem ser usados em condicionais para comparar valores e executar determinado código com base no resultado da condicional, se verdadeira (`True`) ou falsa (`False`).
+
+Em Python, a condicional mais básica é a instrução `if`. Aqui está a sintaxe básica:
+
+```python
+if condition:
+    pass # Código executado se condition for True
+```
+
+- As instruções `if` começam com a palavra-chave `if`.
+- `condition` é uma expressão que avalia para `True` ou `False`, seguida por dois pontos (`:`).
+- O corpo da instrução `if` constitui um bloco de código, que é um grupo de instruções que pertencem ao mesmo contexto. Os espaços no início de uma linha são chamados de indentação. Em Python, a indentação determina quais instruções pertencem a um bloco de código.
+
+No exemplo acima, o corpo da instrução `if` contém uma instrução `pass`. Quando uma instrução `pass` é executada, nada acontece. Esta é uma palavra-chave especial que pode ser usada como um marcador para código futuro e é útil quando blocos de código vazios não são permitidos.
+
+O código dentro do corpo da instrução `if` é executado somente quando a condição é avaliada como verdadeira (`True`). Por exemplo:
+
+```python
+age = 18
+
+if age >= 18:
+    print('You are an adult') # You are an adult
+```
+
+Os quatro espaços antes de `print('You are an adult')` recuam essa linha e a posicionam dentro do bloco `if`.
+
+O código a seguir geraria uma exceção `IndentationError`, que é a maneira do Python sinalizar que a indentação é necessária em um determinado ponto do código:
+
+```python
+age = 18
+
+if age >= 18:
+print('You are an adult') # IndentationError: expected an indented block after 'if' statement on line 3
+```
+
+Embora você possa usar qualquer número de espaços (desde que seja consistente) para determinar cada nível de indentação, o guia de estilo do Python recomenda o uso de quatro espaços.
+
+Os blocos também são encontrados em loops e funções, sobre os quais você aprenderá em lições futuras.
+
+Voltando ao nosso exemplo, se `age` for menor que `18`, nada será impresso no terminal:
+
+```python
+age = 12
+
+if age >= 18:
+    print('You are an adult') # Nada aparece no terminal
+```
+
+### A cláusula else
+
+Mas e se você também quiser imprimir algo se `age` for menor que `18`? É aí que entra a cláusula `else`. A cláusula `else` é executada quando a condição do `if` é falsa. Aqui está a sintaxe de uma instrução `if…else`:
+
+```python
+if condition:
+    pass # Código executado se condition for True
+else:
+    pass # Código executado se condition for False
+```
+
+Por exemplo:
+
+```python
+age = 12
+
+if age >= 18:
+    print('You are an adult')
+else:
+    print('You are not an adult yet') # You are not an adult yet
+```
+
+Observe que não é possível inserir nenhuma instrução entre o bloco `if` e a cláusula `else`. O código a seguir geraria um erro `SyntaxError`:
+
+```python
+age = 12
+
+if age >= 18:
+    print('You are an adult')
+print('Almost there!')
+else: # SyntaxError: invalid syntax
+    print('You are not an adult yet')
+```
+
+### A cláusula elif
+
+Pode haver situações em que você queira levar em conta múltiplas condições. Para isso, o Python permite que você estenda sua instrução `if` com a palavra-chave `elif` (else if).
+
+Eis a sintaxe:
+
+```python
+if condition1:
+    pass # Código executado se condition1 for True
+elif condition2:
+    pass # Código executado se condition1 for False e condition2 for True
+else:
+    pass # Código executado se todas as condições forem False
+```
+
+Por exemplo:
+
+```python
+age = 12
+
+if age >= 18:
+    print('You are an adult')
+elif age >= 13:
+    print('You are a teenager')
+else:
+    print('You are a child') # You are a child
+```
+
+Observe que você pode usar quantas cláusulas `elif` quiser:
+
+```python
+age = 2
+
+if age >= 65:
+    print('You are a senior citizen')
+elif age >= 30:
+    print('You are an adult in your prime')
+elif age >= 18:
+    print('You are a young adult')
+elif age >= 13:
+    print('You are a teenager')
+elif age >= 3:
+    print('You are a young child')
+else:
+    print('You are a toddler or an infant') # You are a toddler or an infant
+```
+
+---
+
+## Truthy, falsy e operadores booleanos
+
+Na lição anterior, você aprendeu como usar operadores de comparação e declarações condicionais para controlar o fluxo dos seus programas.
+
+Embora eles sejam muito poderosos, você frequentemente encontrará situações em que precisa comparar múltiplos valores ao mesmo tempo. Isso pode levar a declarações condicionais aninhadas, por exemplo:
+
+```python
+is_citizen = True
+age = 25
+
+if is_citizen:
+    if age >= 18:
+        print('You are eligible to vote') # You are eligible to vote
+    else:
+        print('You are not eligible to vote')
+else:
+    print('You are not eligible to vote')
+```
+
+O exemplo acima primeiro verificará se `is_citizen` é `True`. Se for o caso, ele então irá para a declaração `if` aninhada e verificará se `age` é maior ou igual a `18`. Como `age` é maior ou igual a `18`, a mensagem exibida no terminal será `You are eligible to vote`. Se `is_citizen` fosse `False`, então a mensagem impressa no terminal teria sido `You are not eligible to vote`.
+
+Se você estiver trabalhando com declarações condicionais mais complexas, pode usar os operadores `and`, `or` e `not` do Python.
+
+Mas antes de mergulharmos nesses operadores, vamos dar uma olhada no que são valores truthy e falsy.
+
+### Valores truthy e falsy
+
+Em Python, todo valor tem um valor booleano inerente, ou um sentido embutido de se ele deve ser tratado como `True` ou `False` em um contexto lógico. Muitos valores são considerados **truthy**, ou seja, eles avaliam para `True` em um contexto lógico. Outros são **falsy**, significando que eles avaliam para `False`.
+
+Aqui estão alguns valores falsy:
+
+- `False`
+- Inteiro `0`
+- Número de ponto flutuante `0.0`
+- Strings vazias `""`
+
+Outros valores como números diferentes de zero e strings não vazias são truthy.
+
+Se você quer verificar se um valor é truthy ou falsy, você pode usar a função embutida `bool()`. Ela converte explicitamente um valor para seu equivalente booleano e retorna `True` para valores truthy e `False` para valores falsy. Aqui estão alguns exemplos:
+
+```python
+print(bool(False)) # False
+print(bool(0))  # False
+print(bool('')) # False
+
+print(bool(True)) # True
+print(bool(1)) # True
+print(bool('Hello')) # True
+```
+
+### Operadores booleanos
+
+Agora que você entende os valores truthy e falsy, podemos dar uma olhada nos operadores booleanos, que também são conhecidos como operadores lógicos. Estes são operadores especiais que permitem combinar múltiplas expressões para criar uma lógica de tomada de decisão mais complexa no seu código.
+
+Existem três operadores booleanos em Python: `and`, `or` e `not`.
+
+### O operador and
+
+Vamos primeiro analisar o operador `and`.
+
+O operador `and` recebe dois operandos e retorna o primeiro operando se ele for falsy; caso contrário, retorna o segundo operando. Ambos os operandos devem ser truthy para que uma expressão resulte em um valor truthy.
+
+Aqui está um exemplo:
+
+```python
+is_citizen = True
+age = 25
+
+print(is_citizen and age) # 25
+```
+
+No exemplo acima, o número 25 é impresso no terminal porque o operador `and` avaliará o segundo operando se o primeiro operando for `True`. O operador `and` é conhecido como um operador de curto-circuito. Short-circuiting significa que o Python verifica os valores da esquerda para a direita e para assim que determina o resultado final.
+
+Você frequentemente usará `and` dentro de declarações `if` para verificar se múltiplas condições são atendidas. Veja como você pode refatorar o exemplo anterior para usar o operador `and` em vez de declarações `if` aninhadas:
+
+```python
+is_citizen = True
+age = 25
+
+if is_citizen and age >= 18:
+    print('You are eligible to vote') # You are eligible to vote
+else:
+    print('You are not eligible to vote')
+```
+
+No exemplo acima, `is_citizen` é `True` e `age >= 18` avalia para `True`. Como ambos os operandos do operador `and` são truthy, a condição `is_citizen and age >= 18` é avaliada como `True` e a chamada `print` no bloco `if` é executada.
+
+### O operador or
+
+Agora vamos analisar o operador `or`. Esse operador retorna o primeiro operando se ele for truthy; caso contrário, retorna o segundo operando. Uma expressão `or` resulta em um valor truthy se pelo menos um dos operandos for truthy. O operador `or` também é conhecido como operador de curto-circuito. Aqui está um exemplo:
+
+```python
+age = 19
+is_employed = False
+
+print(age or is_employed) # 19
+```
+
+O código acima imprimirá o número 19 porque o primeiro operando `age` é truthy.
+
+Se você precisa verificar se uma ou mais expressões são `True`, então você pode usar o operador `or` em uma condicional assim:
+
+```python
+age = 19
+is_student = True
+
+if age < 18 or is_student:
+    print('You are eligible for a student discount') # You are eligible for a student discount
+else:
+    print('You are not eligible for a student discount')
+```
+
+Neste caso, `age < 18` é `False`, mas `is_student` é `True`. Como pelo menos uma condição é verdadeira, toda a expressão `or` é avaliada como `True` e a mensagem de desconto no bloco `if` é exibida.
+
+### O operador not
+
+O último operador que vamos analisar é o operador `not` que recebe um único operando e inverte seu valor booleano. Ele converte valores truthy em `False` e valores falsy em `True`. Ao contrário dos operadores anteriores que analisamos, `not` sempre retorna `True` ou `False`.
+
+Aqui estão alguns exemplos:
+
+```python
+print(not '') # True, porque a string vazia é falsy
+print(not 'Hello') # False, porque uma string não vazia é truthy
+print(not 0) # True, porque 0 é falsy
+print(not 1) # False, porque 1 é truthy
+print(not False) # True, porque False é falsy
+print(not True) # False, porque True é truthy
+```
+
+É comum usar o operador `not` em condicionais para verificar se um valor é falsy, assim:
+
+```python
+is_admin = False
+
+if not is_admin:
+    print('Access denied for non-administrators.') # Access denied for non-administrators.
+else:
+    print('Welcome, Administrator!')
+```
+
+Como `is_admin` é `False`, então `not is_admin` está dizendo `not False`, que é `True`. Então a mensagem `Access denied for non-administrators.` será exibida.
