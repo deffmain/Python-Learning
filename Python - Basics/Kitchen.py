@@ -1,5 +1,5 @@
 """
-Arquivo: Kitcken.py
+Arquivo: Kitchen.py
 Tema: Funções, parâmetros, return e escopo de variáveis (estoque de uma cozinha)
 
 Funções praticadas:
