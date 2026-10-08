@@ -1,6 +1,6 @@
 # Python — Fundamentos
 
-> Anotações práticas sobre o que é Python e onde ele é usado, declaração de variáveis, regras e convenções de nomenclatura, comentários, a função `print()`, tipos de dados, strings e seus métodos, inteiros e floats, atribuição aumentada, condicionais e operadores de comparação, valores truthy e falsy, operadores booleanos e funções (embutidas e personalizadas, parâmetros e argumentos, `return` e `None`).
+> Anotações práticas sobre o que é Python e onde ele é usado, declaração de variáveis, regras e convenções de nomenclatura, comentários, a função `print()`, tipos de dados, strings e seus métodos, inteiros e floats, atribuição aumentada, condicionais e operadores de comparação, valores truthy e falsy, operadores booleanos, funções (embutidas e personalizadas, parâmetros e argumentos, `return` e `None`) e escopo local e global.
 
 ---
 
@@ -1293,3 +1293,37 @@ print(my_sum) # 4
 ```
 
 Agora, `calculate_sum` retorna a soma de `a` e `b`, que é armazenada em `my_sum`.
+
+---
+
+## Escopo
+
+O escopo determina onde você pode usar uma variável no seu código.
+
+Python tem regras adicionais de escopo. Por enquanto, foque no escopo local e global.
+
+### Escopo global e escopo local
+
+Uma variável criada fora de uma função tem escopo global. Você pode usá-la tanto dentro quanto fora das funções.
+
+Uma variável criada dentro de uma função tem escopo local. Você só pode usá-la dentro dessa função. Parâmetros de função também são variáveis locais.
+
+Aqui está um exemplo de escopo local e global:
+
+```python
+tax_rate = 0.1
+
+def calculate_tax(price):
+    tax = price * tax_rate
+    return tax
+
+print(calculate_tax(50)) # 5.0
+print(tax_rate) # 0.1
+print(tax) # NameError: name 'tax' is not defined
+```
+
+A variável `tax_rate` é global porque foi criada fora da função. A função `calculate_tax` pode lê-la, e a segunda chamada de `print()` também pode lê-la.
+
+O parâmetro `price` e a variável `tax` são locais para `calculate_tax`. Eles estão disponíveis enquanto essa função executa, mas não fora dela. A última chamada de `print()` gera um `NameError` porque `tax` não está definido no escopo global.
+
+> Repare: dentro da função, você pode ler a variável global, mas atribuir um valor a ela (`tax_rate = 0.2`) cria uma variável local com o mesmo nome. A global continua valendo `0.1`.
